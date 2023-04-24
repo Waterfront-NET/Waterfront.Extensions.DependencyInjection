@@ -40,16 +40,15 @@ class BuildProject {
 
             var projectReferenceNodes = doc.SelectNodes("//ProjectReference");
             if(projectReferenceNodes != null) {
-                Console.WriteLine("Found {0} project reference nodes", projectReferenceNodes.Count);
                 foreach(XmlNode node in projectReferenceNodes) {
-                    var includeAttr = node.Attributes.GetNamedItem("Include");
+                    XmlNode includeAttr = node.Attributes.GetNamedItem("Include");
                     if(includeAttr == null) {
                         continue;
                     }
 
-                    var relPath = includeAttr.Value;
-                    var absPath = FilePath.FromString(relPath).MakeAbsolute(Directory);
-                    var requiredProject = projects.Find(project => project.Path == absPath);
+                    string relPath = includeAttr.Value;
+                    FilePath absPath = FilePath.FromString(relPath).MakeAbsolute(Directory);
+                    BuildProject requiredProject = projects.Find(project => project.Path == absPath);
 
                     if(requiredProject == null) {
                         throw new Exception($"Dependency for project {Name} was not found: " + absPath.ToString());
@@ -57,8 +56,6 @@ class BuildProject {
 
                     _dependencies.Add(requiredProject);
                 }
-            } else {
-                Console.WriteLine("Project reference nodes were not found");
             }
         }
 
