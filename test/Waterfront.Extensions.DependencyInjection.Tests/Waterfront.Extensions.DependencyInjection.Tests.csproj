@@ -20,9 +20,4 @@
         <ProjectReference
             Include="..\..\src\Waterfront.Extensions.DependencyInjection\Waterfront.Extensions.DependencyInjection.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-        <Reference Include="..\..\..\Waterfront\src\Waterfront.Common\bin\Debug\net6.0\Waterfront.Common.dll" />
-        <Reference Include="..\..\..\Waterfront\src\Waterfront.Core\bin\Debug\net6.0\Waterfront.Core.dll" />
-    </ItemGroup>
 </Project>
