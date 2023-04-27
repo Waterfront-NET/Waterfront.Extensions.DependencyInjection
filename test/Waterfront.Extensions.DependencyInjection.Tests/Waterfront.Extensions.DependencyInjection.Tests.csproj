@@ -22,13 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="Waterfront.Common">
-            <HintPath>
-                ..\..\..\Waterfront\src\Waterfront.Common\bin\Debug\net6.0\Waterfront.Common.dll</HintPath>
-        </Reference>
-        <Reference Include="Waterfront.Core">
-            <HintPath>
-                ..\..\..\Waterfront\src\Waterfront.Core\bin\Debug\net6.0\Waterfront.Core.dll</HintPath>
-        </Reference>
+        <Reference Include="..\..\..\Waterfront\src\Waterfront.Common\bin\Debug\net6.0\Waterfront.Common.dll" />
+        <Reference Include="..\..\..\Waterfront\src\Waterfront.Core\bin\Debug\net6.0\Waterfront.Core.dll" />
     </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
-#load build/data/args.cake
-#load build/data/paths.cake
+#load build/data/*.cake
 #load build/tasks/*.cake
 
 Setup(ctx => {
@@ -14,6 +13,9 @@ Setup(ctx => {
             string.Join(", ", project.Dependencies().Select(dep => dep.Name))
         );
     });
+
+    Environment.SetEnvironmentVariable("SEMVER", version.SemVer);
+    Environment.SetEnvironmentVariable("INFO_VER", version.InformationalVersion);
 });
 
 

@@ -7,3 +7,14 @@ jobs:
         with: { fetch-depth: 0 }
       - uses: actions/setup-dotnet@v3
       - run: ./build.ps1 --target build --configuration Release
+        shell: pwsh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: |
+            artifacts/pkg/*.nupkg
+            artifacts/pkg/*.snupkg
+      - uses: actions/upload-artifact@v3
+        with:
+          name: libraries
+          path: artifacts/lib/*.zip
