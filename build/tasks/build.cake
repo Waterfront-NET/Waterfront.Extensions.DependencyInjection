@@ -21,7 +21,8 @@ projects.ForEach(project => {
 
             Zip(sourceDir, targetArchive);
         }
-    }).IsDependentOn(project.TaskName("restore"));
+    }).IsDependentOn(project.TaskName("restore"))
+      .WithCriteria(!args.NoBuild);
 
     project.Dependencies().ForEach(dep => {
         task.IsDependentOn(dep.TaskName("build"));
