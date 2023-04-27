@@ -42,4 +42,6 @@ jobs:
           path: artifacts/pkg
       - run: ./build.ps1 -t artifacts/push/nuget
         shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     needs: [build, test]
