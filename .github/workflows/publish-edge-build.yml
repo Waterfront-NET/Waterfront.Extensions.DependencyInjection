@@ -44,4 +44,9 @@ jobs:
         shell: pwsh
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      - run: ./build.ps1 -t artifacts/push/github
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: [build, test]
+    permissions: { packages: write }
