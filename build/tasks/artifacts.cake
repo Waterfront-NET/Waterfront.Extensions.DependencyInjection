@@ -34,7 +34,7 @@ Task("artifacts/push/github")
 });
 
 Task("artifacts/push/github/setup-source").Does(() => {
-    Information("Setting up github.com package registry...")
+    Information("Setting up github.com package registry...");
     DotNetNuGetAddSource("github.com", new DotNetNuGetSourceSettings {
         Source = "https://nuget.pkg.github.com/Waterfront-NET/index.json",
         UserName = "USERNAME",
