@@ -52,7 +52,7 @@ public interface IWaterfrontBuilder
         ServiceLifetime lifetime = ServiceLifetime.Scoped
     ) where TService : class, ITokenDefinitionService;
 
-    IWaterfrontBuilder WithAuthentication<TAuthn>() where TAuthn : class, IAclAuthenticationService;
+    /*IWaterfrontBuilder WithAuthentication<TAuthn>() where TAuthn : class, IAclAuthenticationService;
 
     IWaterfrontBuilder WithAuthentication<TAuthn, TOptions>(Action<TOptions> configureOptions)
     where TAuthn : AclAuthenticationServiceBase<TOptions> where TOptions : class;
@@ -88,5 +88,5 @@ public interface IWaterfrontBuilder
         Action<TOptions, TDependency> configureOptions
     ) where TAuthz : AclAuthorizationServiceBase<TOptions>
       where TOptions : class
-      where TDependency : notnull;
+      where TDependency : notnull;*/
 }
