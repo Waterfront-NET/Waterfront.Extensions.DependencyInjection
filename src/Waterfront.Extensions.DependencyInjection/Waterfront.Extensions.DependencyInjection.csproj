@@ -10,15 +10,12 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-        <PackageReference Include="Waterfront.Common" Version="1.0.0-alpha.75" />
-        <PackageReference Include="Waterfront.Core" Version="1.0.0-alpha.75" />
+        <PackageReference Include="Waterfront.Core" Version="1.0.0-alpha.76" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="WaterfrontBuilder.Authentication.cs" />
-      <None Include="WaterfrontBuilder.Authentication.cs" />
       <Compile Remove="WaterfrontBuilder.Authorization.cs" />
-      <None Include="WaterfrontBuilder.Authorization.cs" />
     </ItemGroup>
 
 </Project>
