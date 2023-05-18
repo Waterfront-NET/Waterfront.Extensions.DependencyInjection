@@ -13,9 +13,4 @@
         <PackageReference Include="Waterfront.Core" Version="1.0.0-alpha.79" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Compile Remove="WaterfrontBuilder.Authentication.cs" />
-        <Compile Remove="WaterfrontBuilder.Authorization.cs" />
-    </ItemGroup>
-
 </Project>
