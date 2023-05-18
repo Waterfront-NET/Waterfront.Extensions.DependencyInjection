@@ -17,12 +17,14 @@ public class WaterfrontBuilderTests
     public void TestDefaultCreation()
     {
         IServiceCollection sc = GetServiceCollection();
-        new WaterfrontBuilder(sc);
+
+        sc.Invoking(sc => new WaterfrontBuilder(sc)).Should().NotThrow();
+
         ServiceProvider sp = sc.BuildServiceProvider();
 
         IOptions<TokenOptions>? options = sp.GetService<IOptions<TokenOptions>>();
         options.Should().NotBeNull();
-        options.Value.Lifetime.Should().Be(TimeSpan.FromSeconds(60));
+        options!.Value.Lifetime.Should().Be(TimeSpan.FromSeconds(60));
         options.Value.Issuer.Should().Be("Waterfront");
     }
 
@@ -35,7 +37,7 @@ public class WaterfrontBuilderTests
 
         IOptions<TokenOptions>? options = sp.GetService<IOptions<TokenOptions>>();
         options.Should().NotBeNull();
-        options.Value.Lifetime.Should().Be(TimeSpan.FromSeconds(60));
+        options!.Value.Lifetime.Should().Be(TimeSpan.FromSeconds(60));
         options.Value.Issuer.Should().Be("Waterfront");
     }
 
@@ -49,7 +51,7 @@ public class WaterfrontBuilderTests
 
         IOptions<TokenOptions>? options = sp.GetService<IOptions<TokenOptions>>();
         options.Should().NotBeNull();
-        options.Value.Lifetime.Should().Be(TimeSpan.FromSeconds(120));
+        options!.Value.Lifetime.Should().Be(TimeSpan.FromSeconds(120));
         options.Value.Issuer.Should().Be("localhost");
     }
 }
