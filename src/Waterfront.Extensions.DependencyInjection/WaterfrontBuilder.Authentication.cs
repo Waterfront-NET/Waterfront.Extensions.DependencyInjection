@@ -34,5 +34,24 @@ public partial class WaterfrontBuilder
     public IWaterfrontBuilder WithAuthentication<TService, TOptions>(Action<TOptions> configureOptions)
         where TService : AclAuthenticationServiceBase<TOptions> where TOptions : class =>
         WithAuthentication<TService, TOptions>(Options.DefaultName, configureOptions);
-}
 
+    public IWaterfrontBuilder WithAuthentication<TService, TOptions>(
+        string name,
+        Action<IServiceProvider, TOptions> configureOptions
+    ) where TService : AclAuthenticationServiceBase<TOptions> where TOptions : class
+    {
+        Services.AddScoped<IAclAuthenticationService, TService>(
+            sp =>
+            {
+                TOptions options = sp.GetRequiredService<IOptionsSnapshot<TOptions>>().Get(name);
+                TService service = ActivatorUtilities.CreateInstance<TService>(sp, options);
+
+                return service;
+            }
+        );
+        Services.AddSingleton<IConfigureOptions<TOptions>>(
+            sp => new ConfigureNamedOptions<TOptions>(name, options => configureOptions(sp, options))
+        );
+        return this;
+    }
+}

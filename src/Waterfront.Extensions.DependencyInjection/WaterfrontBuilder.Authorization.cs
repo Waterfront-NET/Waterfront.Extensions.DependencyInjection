@@ -32,4 +32,23 @@ public partial class WaterfrontBuilder
     public IWaterfrontBuilder WithAuthorization<TService, TOptions>(Action<TOptions> configureOptions)
         where TService : AclAuthorizationServiceBase<TOptions> where TOptions : class =>
         WithAuthorization<TService, TOptions>(Options.DefaultName, configureOptions);
+
+    public IWaterfrontBuilder WithAuthorization<TService, TOptions>(
+        string name,
+        Action<IServiceProvider, TOptions> configureOptions
+    ) where TService : AclAuthorizationServiceBase<TOptions> where TOptions : class
+    {
+        Services.AddScoped<IAclAuthorizationService, TService>(
+            sp =>
+            {
+                TOptions options = sp.GetRequiredService<IOptionsSnapshot<TOptions>>().Get(name);
+                TService service = ActivatorUtilities.CreateInstance<TService>(sp, options);
+
+                return service;
+            });
+        Services.AddSingleton<IConfigureOptions<TOptions>>(
+            sp => new ConfigureNamedOptions<TOptions>(name, options => configureOptions(sp, options))
+        );
+        return this;
+    }
 }
