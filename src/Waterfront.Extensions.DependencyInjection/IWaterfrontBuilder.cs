@@ -21,14 +21,12 @@ public interface IWaterfrontBuilder
     IWaterfrontBuilder ConfigureTokens(Action<TokenOptions, IConfiguration> configure);
 
     IWaterfrontBuilder ConfigureTokens<TDependency>(Action<TokenOptions, TDependency> configure)
-    where TDependency : notnull;
+        where TDependency : notnull;
 
-    IWaterfrontBuilder WithSigningCertificateProvider<TProvider>()
-    where TProvider : class, ISigningCertificateProvider;
+    IWaterfrontBuilder WithSigningCertificateProvider<TProvider>() where TProvider : class, ISigningCertificateProvider;
 
-    IWaterfrontBuilder WithSigningCertificateProvider<TProvider, TOptions>(
-        Action<TOptions> configureOptions
-    ) where TProvider : SigningCertificateProviderBase<TOptions> where TOptions : class;
+    IWaterfrontBuilder WithSigningCertificateProvider<TProvider, TOptions>(Action<TOptions> configureOptions)
+        where TProvider : SigningCertificateProviderBase<TOptions> where TOptions : class;
 
     IWaterfrontBuilder WithSigningCertificateProvider<TProvider, TOptions>(
         Action<TOptions, IServiceProvider> configureOptions
@@ -40,53 +38,37 @@ public interface IWaterfrontBuilder
 
     IWaterfrontBuilder WithSigningCertificateProvider<TProvider, TOptions, TDependency>(
         Action<TOptions, TDependency> configureOptions
-    ) where TProvider : SigningCertificateProviderBase<TOptions>
-      where TOptions : class
-      where TDependency : notnull;
+    ) where TProvider : SigningCertificateProviderBase<TOptions> where TOptions : class where TDependency : notnull;
 
-    IWaterfrontBuilder WithTokenEncoder<TEncoder>(
-        ServiceLifetime lifetime = ServiceLifetime.Singleton
-    ) where TEncoder : class, ITokenEncoder;
+    IWaterfrontBuilder WithTokenEncoder<TEncoder>(ServiceLifetime lifetime = ServiceLifetime.Singleton)
+        where TEncoder : class, ITokenEncoder;
 
-    IWaterfrontBuilder WithTokenDefinitionService<TService>(
-        ServiceLifetime lifetime = ServiceLifetime.Scoped
-    ) where TService : class, ITokenDefinitionService;
+    IWaterfrontBuilder WithTokenDefinitionService<TService>(ServiceLifetime lifetime = ServiceLifetime.Scoped)
+        where TService : class, ITokenDefinitionService;
 
-    /*IWaterfrontBuilder WithAuthentication<TAuthn>() where TAuthn : class, IAclAuthenticationService;
+    IWaterfrontBuilder WithAuthentication<TService>() where TService : class, IAclAuthenticationService;
 
-    IWaterfrontBuilder WithAuthentication<TAuthn, TOptions>(Action<TOptions> configureOptions)
-    where TAuthn : AclAuthenticationServiceBase<TOptions> where TOptions : class;
+    IWaterfrontBuilder WithAuthentication<TService, TOptions>(string name, Action<TOptions> configureOptions)
+        where TService : AclAuthenticationServiceBase<TOptions> where TOptions : class;
 
-    IWaterfrontBuilder WithAuthentication<TAuthn, TOptions>(
-        Action<TOptions, IServiceProvider> configureOptions
-    ) where TAuthn : AclAuthenticationServiceBase<TOptions> where TOptions : class;
+    IWaterfrontBuilder WithAuthentication<TService, TOptions>(Action<TOptions> configureOptions)
+        where TService : AclAuthenticationServiceBase<TOptions> where TOptions : class;
 
-    IWaterfrontBuilder WithAuthentication<TAuthn, TOptions>(
-        Action<TOptions, IConfiguration> configureOptions
-    ) where TAuthn : AclAuthenticationServiceBase<TOptions> where TOptions : class;
+    IWaterfrontBuilder WithAuthentication<TService, TOptions>(
+        string name,
+        Action<IServiceProvider, TOptions> configureOptions
+    ) where TService : AclAuthenticationServiceBase<TOptions> where TOptions : class;
 
-    IWaterfrontBuilder WithAuthentication<TAuthn, TOptions, TDependency>(
-        Action<TOptions, TDependency> configureOptions
-    ) where TAuthn : AclAuthenticationServiceBase<TOptions>
-      where TOptions : class
-      where TDependency : notnull;
+    IWaterfrontBuilder WithAuthorization<TService>() where TService : class, IAclAuthorizationService;
 
-    IWaterfrontBuilder WithAuthorization<TAuthz>() where TAuthz : class, IAclAuthorizationService;
+    IWaterfrontBuilder WithAuthorization<TService, TOptions>(string name, Action<TOptions> configureOptions)
+        where TService : AclAuthorizationServiceBase<TOptions> where TOptions : class;
 
-    IWaterfrontBuilder WithAuthorization<TAuthz, TOptions>(Action<TOptions> configureOptions)
-    where TAuthz : AclAuthorizationServiceBase<TOptions> where TOptions : class;
+    IWaterfrontBuilder WithAuthorization<TService, TOptions>(Action<TOptions> configureOptions)
+        where TService : AclAuthorizationServiceBase<TOptions> where TOptions : class;
 
-    IWaterfrontBuilder WithAuthorization<TAuthz, TOptions>(
-        Action<TOptions, IServiceProvider> configureOptions
-    ) where TAuthz : AclAuthorizationServiceBase<TOptions> where TOptions : class;
-
-    IWaterfrontBuilder WithAuthorization<TAuthz, TOptions>(
-        Action<TOptions, IConfiguration> configureOptions
-    ) where TAuthz : AclAuthorizationServiceBase<TOptions> where TOptions : class;
-
-    IWaterfrontBuilder WithAuthorization<TAuthz, TOptions, TDependency>(
-        Action<TOptions, TDependency> configureOptions
-    ) where TAuthz : AclAuthorizationServiceBase<TOptions>
-      where TOptions : class
-      where TDependency : notnull;*/
+    IWaterfrontBuilder WithAuthorization<TService, TOptions>(
+        string name,
+        Action<IServiceProvider, TOptions> configureOptions
+    ) where TService : AclAuthorizationServiceBase<TOptions> where TOptions : class;
 }
